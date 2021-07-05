@@ -27,7 +27,8 @@ describe("generator-go-cli-app:app", () => {
         .run(path.join(__dirname, "../generators/app"))
         .withPrompts({
           appname: "clitest",
-          repourl: "neflyte/clitest"
+          repourl: "clitest",
+          nogomodtidy: false
         });
       tempDir = await runResult.toPromise();
     } catch (e) {
@@ -46,9 +47,5 @@ describe("generator-go-cli-app:app", () => {
     for (const file of allFiles) {
       assert.file(path.join(tempDir, file));
     }
-  });
-
-  it("creates go.sum by invoking 'go mod tidy'", () => {
-    assert.file(path.join(tempDir, "go.sum"));
   });
 });
